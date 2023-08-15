@@ -1,0 +1,65 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/CooperHewitt-Bold.otf",
+      "sha1": "7f5bdefb8df026b29296325d21c9ae7f20db09ad"
+    },
+    {
+      "path": "src/assets/fonts/CooperHewitt-Book.otf",
+      "sha1": "ce5285eb0275c94398442b364419fcc38848c2d4"
+    },
+    {
+      "path": "src/assets/fonts/CooperHewitt-Heavy.otf",
+      "sha1": "57b32b78a0dc70d153aa70db83464a727e17720b"
+    },
+    {
+      "path": "src/assets/fonts/CooperHewitt-Light.otf",
+      "sha1": "cdf47a3175e2da5676170252b40664b45fe0657a"
+    },
+    {
+      "path": "src/assets/fonts/CooperHewitt-Medium.otf",
+      "sha1": "a3833d44044c64c029a5b6edc2feb9c3158c94d5"
+    },
+    {
+      "path": "src/assets/fonts/CooperHewitt-Semibold.otf",
+      "sha1": "b1b2e3a1dabef9b16293a89733f29392e787f0a2"
+    },
+    {
+      "path": "src/assets/fonts/CooperHewitt-Thin.otf",
+      "sha1": "0d679adbb18d2223315bce168c0c5cfd0f2b311a"
+    },
+    {
+      "path": "src/assets/images/cover-intro-01.jpeg",
+      "sha1": "e0ff5fdbe5d8a1abd89327b1fab12247c3261b62"
+    },
+    {
+      "path": "src/assets/images/cover-intro-02.jpeg",
+      "sha1": "6d18864b39cbd4dc76bc4fa1bc6e0fbc0d0853a3"
+    },
+    {
+      "path": "src/assets/images/cover-intro-03.jpeg",
+      "sha1": "6aeb407f3941591fec99b32d216a47baf491dec3"
+    },
+    {
+      "path": "src/assets/images/cover-intro-04.jpeg",
+      "sha1": "92fd51bfb1832bdd7786bfe611ca5dcb43b19957"
+    },
+    {
+      "path": "src/assets/images/cover-intro-05.jpeg",
+      "sha1": "10e834a38e1fb92de06f867bd31d336e9fd09832"
+    },
+    {
+      "path": "src/assets/images/logo-black-text.png",
+      "sha1": "fd8ace30ff0bd5a082c9c0af8025af05c6d72027"
+    },
+    {
+      "path": "src/assets/images/logo-primary.png",
+      "sha1": "34c4e6eb0b1871d89ad2c4e8b97f24f3ce1cb225"
+    },
+    {
+      "path": "src/assets/images/logo-white-text.png",
+      "sha1": "9dcb1043d3aee3b4a05348765ddaa842094ffbcd"
+    }
+  ]
+}
