@@ -70,15 +70,13 @@ export const getMessages =
         const {messages, error_type, error_message} = response;
         if (messages) {
           const {thread_id} = params;
+          let lastMessageId = `ls-${new Date().getTime()}`;
           let messagesByThread = {...entities.messagesByThread};
           messagesByThread[thread_id] = messages;
           dispatch(setKeyValue('messagesByThread', messagesByThread));
-
-          if (Array.from(messages).length > 0) {
-            const lastIndex = Array.from(messages).length - 1;
-            const lastMessage = messages.find((_, x) => x === lastIndex);
-            dispatch(setKeyValue('lastMessageId', lastMessage.id));
-          }
+          setTimeout(() => {
+            dispatch(setKeyValue('lastMessageId', lastMessageId));
+          }, 300);
         } else if (error_type) {
           Alert.alert('Echec !', error_message, [{text: 'Fermer'}]);
         } else {
@@ -146,8 +144,9 @@ export const sendMessage =
         dispatch(setKeyValue('messageSending', false));
 
         let response = result.data;
-        const {message} = response;
+        console.log('messageSend [response]', response);
 
+        const {message} = response;
         if (message) {
           dispatch(getChats());
           dispatch(getMessages({thread_id: message.chat_thread_id}));

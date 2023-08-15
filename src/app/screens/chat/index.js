@@ -18,6 +18,7 @@ class ChatPage extends Component {
       threadId: null,
       isRefreshing: false,
       lastMessageId: null,
+      messagesListId: null,
     };
   }
 
@@ -45,7 +46,7 @@ class ChatPage extends Component {
     }
     if (prevState.lastMessageId !== lastMessageId) {
       this.setState({lastMessageId}, () => {
-        this.flatList.scrollToEnd({animated: true});
+        // this.flatList.scrollToEnd({animated: true});
       });
     }
   }
@@ -125,6 +126,9 @@ class ChatPage extends Component {
                   onRefresh={this.onRefreshThread}
                 />
               }
+              onContentSizeChange={(contentWidth, contentHeight) => {
+                this.flatList.scrollToEnd({animated: true});
+              }}
             />
             <MessageEditor
               threadId={thread_id}
