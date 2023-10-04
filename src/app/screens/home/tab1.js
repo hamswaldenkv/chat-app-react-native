@@ -51,10 +51,7 @@ class Tab1 extends Component {
     const {loading, events} = this.props;
     const {refreshing} = this.state;
     return (
-      <LinearGradient
-        locations={[0, 0.5]}
-        style={ThemeStyle.fill}
-        colors={[ThemeColors.primary[700], ThemeColors.formBackground]}>
+      <View style={ThemeStyle.fill}>
         <AppStatusBar />
         <Header
           title=""
@@ -73,7 +70,7 @@ class Tab1 extends Component {
             />
           }>
           <View style={styles.viewHeader}>
-            <Text style={styles.viewTitle}>Events</Text>
+            <Text style={styles.viewTitle}>Upcoming Events</Text>
           </View>
 
           <ListVertical
@@ -87,7 +84,7 @@ class Tab1 extends Component {
             )}
           </View>
         </ScrollView>
-      </LinearGradient>
+      </View>
     );
   }
 
@@ -128,8 +125,8 @@ const styles = StyleSheet.create({
   },
 
   viewTitle: {
-    fontSize: 16,
-    color: ThemeColors.white,
+    fontSize: 22,
+    color: ThemeColors.title,
     fontFamily: ThemeFonts.Bold,
   },
 });

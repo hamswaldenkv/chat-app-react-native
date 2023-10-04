@@ -55,9 +55,7 @@ export const updateDeviceToken =
     const {session} = state;
 
     console.log('updateDeviceToken:', bodyRequest);
-
-    params.access_token = session.accessToken;
-    profileDevices(bodyRequest, params)
+    profileDevices(session.accessToken, bodyRequest, params)
       .then(result => {
         let response = result.data;
         const {device} = response;

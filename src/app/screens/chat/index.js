@@ -24,6 +24,7 @@ class ChatPage extends Component {
 
   componentDidMount() {
     EventsManager.getInstance().on('onThreadCreated', this.onThreadCreated);
+    EventsManager.getInstance().on('onIncomingMessage', this.onIncomingMessage);
 
     const {kind, thread_id, event_id, user_id, createChat} = this.props;
     if (thread_id != null) {
@@ -35,19 +36,29 @@ class ChatPage extends Component {
 
   componentWillUnmount() {
     EventsManager.getInstance().off('onThreadCreated', this.onThreadCreated);
+    EventsManager.getInstance().off(
+      'onIncomingMessage',
+      this.onIncomingMessage,
+    );
   }
 
   componentDidUpdate(prevProps, prevState) {
     const {thread_id, lastMessageId} = this.props;
-    if (prevState.threadId !== thread_id) {
-      this.setState({threadId: thread_id}, () => {
-        this.fetchMessages(thread_id);
-      });
+
+    if (thread_id) {
+      if (prevState.threadId !== thread_id) {
+        this.setState({threadId: thread_id}, () => {
+          this.fetchMessages(thread_id);
+        });
+      }
     }
-    if (prevState.lastMessageId !== lastMessageId) {
-      this.setState({lastMessageId}, () => {
-        // this.flatList.scrollToEnd({animated: true});
-      });
+
+    if (lastMessageId) {
+      if (prevState.lastMessageId !== lastMessageId) {
+        this.setState({lastMessageId}, () => {
+          // this.flatList.scrollToEnd({animated: true});
+        });
+      }
     }
   }
 
@@ -55,6 +66,8 @@ class ChatPage extends Component {
     const {kind, event_id, user_id} = this.props;
     Actions.refresh({thread_id, kind, event_id, user_id});
   };
+
+  onIncomingMessage = () => this.onRefreshThread();
 
   onRefreshThread = () => {
     const {thread_id} = this.props;
@@ -70,7 +83,7 @@ class ChatPage extends Component {
   }
 
   render() {
-    const {isRefreshing} = this.state;
+    const {isRefreshing, threadId} = this.state;
     const {
       sendMessage,
       thread_id,
@@ -131,7 +144,7 @@ class ChatPage extends Component {
               }}
             />
             <MessageEditor
-              threadId={thread_id}
+              threadId={threadId}
               loadingSend={loadingSend}
               sendMessage={sendMessage}
             />

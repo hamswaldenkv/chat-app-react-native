@@ -67,7 +67,12 @@ class LoginPage extends Component {
     )
       return null;
 
-    let body = {emailAddress, userPassword, firstName, lastName};
+    let body = {
+      email_address: emailAddress,
+      password: userPassword,
+      first_name: firstName,
+      last_name: lastName,
+    };
     const {registerUser} = this.props;
     if (registerUser) registerUser(body);
   }

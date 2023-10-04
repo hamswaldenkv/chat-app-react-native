@@ -189,21 +189,11 @@ class FirebaseService extends Component {
    * @param {*} data
    */
   handleNotification(notification, data) {
-    if (data.payload) {
-      let notificationPayloads = JSON.parse(data.payload);
-      console.log(
-        'notificationPayloads',
-        JSON.stringify(notificationPayloads, null, 2),
-      );
-      if (notificationPayloads && notificationPayloads.event) {
-        const {data, event} = notificationPayloads;
+    console.log('handleNotification [data]', JSON.stringify(data, null, 2));
 
-        EventsManager.getInstance()._emit(event, data);
-      } else if (notificationPayloads && notificationPayloads.error) {
-        let message = notification.body;
-
-        EventsManager.getInstance()._emit('onNotificationError', message);
-      }
+    if (data.eventName) {
+      const {eventName, eventData} = data;
+      EventsManager.getInstance()._emit(eventName, eventData);
     }
   }
 

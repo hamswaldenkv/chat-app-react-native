@@ -5,7 +5,10 @@ const ApiContext = axios.create({
   baseURL: API_BASE_HOST,
   withCredentials: false,
   timeout: 30000,
-  headers: {'Content-Type': 'text/plain'},
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
 });
 
 ApiContext.interceptors.response.use(
@@ -39,7 +42,7 @@ export function sessionRefresh(bodyParams, params = {}) {
  */
 
 export function userCreate(body, params = {}) {
-  return ApiContext.post('auth/register', body, {params});
+  return ApiContext.post('auth/signup', body, {params});
 }
 
 export function userLogin(body, params = {}) {
@@ -51,7 +54,7 @@ export function accountPassword(body, params = {}) {
 }
 
 export function assetUpload(body, params = {}) {
-  return ApiContext.post('uploads/upload', body, {
+  return ApiContext.post('uploads', body, {
     params,
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -63,45 +66,80 @@ export function assetUpload(body, params = {}) {
  * Event
  */
 
-export function eventList(params = {}) {
-  return ApiContext.get('event/list', {params});
+export function eventList(accessToken, params = {}) {
+  return ApiContext.get('events', {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
-export function eventJoin(eventId, body, params = {}) {
-  return ApiContext.post(`event/join/${eventId}`, body, {params});
+export function eventJoin(accessToken, eventId, body, params = {}) {
+  return ApiContext.post(`events/${eventId}/participants`, body, {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
 /**
  * Profiles
  */
 export function profileGet(profileId, params = {}) {
-  return ApiContext.get(`profiles/details/${profileId}`, {params});
+  return ApiContext.get(`profiles/${profileId}`, {params});
 }
 
-export function profileDevices(body, params = {}) {
-  return ApiContext.post('profile/devices', body, {params});
+export function profileDevices(accessToken, body, params = {}) {
+  return ApiContext.post('devices', body, {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
 /**
  * Chats
  */
 
-export function chatList(params = {}) {
-  return ApiContext.get('chat/threads', {params});
+export function chatList(accessToken, params = {}) {
+  return ApiContext.get('chats', {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
-export function chatCreate(body, params = {}) {
-  return ApiContext.post('chat/thread', body, {params});
+export function chatCreate(accessToken, body, params = {}) {
+  return ApiContext.post('chats', body, {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
-export function messagesList(params = {}) {
-  return ApiContext.get('message/filter', {params});
+export function messagesList(accessToken, params = {}) {
+  return ApiContext.get('messages', {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
-export function messageSend(body, params = {}) {
-  return ApiContext.post('message/send', body, {params});
+export function messageSend(accessToken, body, params = {}) {
+  return ApiContext.post('messages', body, {
+    params,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 }
 
 export function messageDelete(refId, body, params = {}) {
-  return ApiContext.post(`message/delete/${refId}`, body, {params});
+  return ApiContext.post(`messages/${refId}`, body, {params});
 }

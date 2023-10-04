@@ -51,10 +51,7 @@ class Tab1 extends Component {
     const {loading, chats} = this.props;
     const {refreshing} = this.state;
     return (
-      <LinearGradient
-        locations={[0, 0.2]}
-        style={ThemeStyle.fill}
-        colors={[ThemeColors.primary[700], ThemeColors.white]}>
+      <View style={ThemeStyle.fillEmpty}>
         <AppStatusBar />
         <Header
           title=""
@@ -87,7 +84,7 @@ class Tab1 extends Component {
             )}
           </View>
         </ScrollView>
-      </LinearGradient>
+      </View>
     );
   }
 

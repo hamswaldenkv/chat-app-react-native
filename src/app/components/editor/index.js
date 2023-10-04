@@ -60,7 +60,7 @@ const MessageEditor = ({sendMessage, threadId, loadingSend}) => {
 
       try {
         let formData = new FormData();
-        formData.append('photo', {uri, type, name: fileName});
+        formData.append('file', {uri, type, name: fileName});
 
         setLoading(true);
         let {data} = await assetUpload(formData);
@@ -71,7 +71,7 @@ const MessageEditor = ({sendMessage, threadId, loadingSend}) => {
 
         setKind('photo');
         setPhotoUrl(asset.url);
-        setContent(asset.original_name);
+        setContent('Photo');
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -91,7 +91,7 @@ const MessageEditor = ({sendMessage, threadId, loadingSend}) => {
 
       try {
         let formData = new FormData();
-        formData.append('photo', {uri, type, name: fileName});
+        formData.append('file', {uri, type, name: fileName});
 
         setLoading(true);
         let {data} = await assetUpload(formData);
@@ -102,6 +102,7 @@ const MessageEditor = ({sendMessage, threadId, loadingSend}) => {
 
         setKind('photo');
         setPhotoUrl(asset.url);
+        setContent('Photo');
         setLoading(false);
       } catch (error) {
         setLoading(false);

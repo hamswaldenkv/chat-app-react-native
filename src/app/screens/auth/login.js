@@ -61,7 +61,7 @@ class LoginPage extends Component {
 
     if (emailAddress === '' || userPassword === '') return null;
 
-    let body = {emailAddress, userPassword};
+    let body = {email_address: emailAddress, password: userPassword};
     const {loginAccount} = this.props;
     if (loginAccount) loginAccount(body);
   }

@@ -61,7 +61,7 @@ class LoginPage extends Component {
     const {registerUser, emailAddress, accountPassword} = this.props;
 
     let body = {
-      username: emailAddress,
+      email_address: emailAddress,
       password: accountPassword,
       profile_name: profileName,
     };

@@ -23,16 +23,16 @@ export const getChats =
     params.access_token = session.accessToken;
 
     dispatch(setKeyValue('loadingCreate', true));
-    chatList(params)
+    chatList(session.accessToken, params)
       .then(result => {
         dispatch(setKeyValue('loadingCreate', false));
 
         let response = result.data;
-        console.log('chatList :', response);
+        // console.log('chatList :', response);
 
-        const {chat_threads, error_type, error_message} = response;
-        if (chat_threads) {
-          dispatch(setKeyValue('chats', chat_threads));
+        const {data, error_type, error_message} = response;
+        if (data) {
+          dispatch(setKeyValue('chats', data));
         } else if (error_type) {
           Alert.alert('Echec !', error_message, [{text: 'Fermer'}]);
         } else {
@@ -57,15 +57,15 @@ export const getMessages =
     const state = getState();
     const {session, entities} = state;
 
-    params.access_token = session.accessToken;
+    console.log({params});
 
     dispatch(setKeyValue('messageLoading', true));
-    messagesList(params)
+    messagesList(session.accessToken, params)
       .then(result => {
         dispatch(setKeyValue('messageLoading', false));
 
         let response = result.data;
-        console.log('messagesList :', response);
+        // console.log('messagesList :', response);
 
         const {messages, error_type, error_message} = response;
         if (messages) {
@@ -85,7 +85,7 @@ export const getMessages =
       })
       .catch(err => {
         dispatch(setKeyValue('messageLoading', false));
-        console.log('messagesList [err]:', err);
+        console.log('messagesList [err]:', err.message);
 
         Alert.alert('Echec !', 'Impossible de récupérer les messages', [
           {text: 'Fermer'},
@@ -99,10 +99,8 @@ export const createChat =
     const state = getState();
     const {session} = state;
 
-    params.access_token = session.accessToken;
-
     dispatch(setKeyValue('loadingCreate', true));
-    chatCreate(bodyRequest, params)
+    chatCreate(session.accessToken, bodyRequest, params)
       .then(result => {
         dispatch(setKeyValue('loadingCreate', false));
 
@@ -135,16 +133,12 @@ export const sendMessage =
     const state = getState();
     const {session} = state;
 
-    console.log('updateDeviceToken:', bodyRequest);
-
-    params.access_token = session.accessToken;
     dispatch(setKeyValue('messageSending', true));
-    messageSend(bodyRequest, params)
+    messageSend(session.accessToken, bodyRequest, params)
       .then(result => {
         dispatch(setKeyValue('messageSending', false));
 
         let response = result.data;
-        console.log('messageSend [response]', response);
 
         const {message} = response;
         if (message) {
@@ -156,7 +150,7 @@ export const sendMessage =
         }
       })
       .catch(error => {
-        dispatch(setKeyValue('messageSending', false));
         console.log('messageSend [error]', error);
+        dispatch(setKeyValue('messageSending', false));
       });
   };

@@ -75,7 +75,7 @@ class EventPage extends Component {
       venue_address,
       start_at,
       finish_at,
-      paticipants,
+      participants = [],
     } = event;
     return (
       <View style={ThemeStyle.fill}>
@@ -166,14 +166,14 @@ class EventPage extends Component {
 
             <FlatList
               horizontal
-              data={paticipants}
+              data={participants}
               style={{paddingLeft: 50}}
               showsHorizontalScrollIndicator={false}
               keyExtractor={(_, x) => `profile-${x}`}
               ListFooterComponent={<View style={{width: 50}} />}
               renderItem={({item}) => (
                 <AvatarProfile
-                  title={item.name}
+                  title={item.first_name}
                   hideName={false}
                   onPress={() => {
                     this.onSelectParticipant(item);

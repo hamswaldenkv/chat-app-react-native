@@ -14,19 +14,17 @@ export const getEvents =
     const state = getState();
     const {session} = state;
 
-    params.access_token = session.accessToken;
-
     dispatch(setKeyValue('loading', true));
-    eventList(params)
+    eventList(session.accessToken, params)
       .then(result => {
         dispatch(setKeyValue('loading', false));
 
         let response = result.data;
         // console.log('eventList :', response);
 
-        const {events} = response;
-        if (events) {
-          dispatch(setKeyValue('events', events));
+        const {data} = response;
+        if (data) {
+          dispatch(setKeyValue('events', data));
         } else {
           throw new Error('error occured');
         }
@@ -49,10 +47,8 @@ export const joinEvent =
     const state = getState();
     const {session} = state;
 
-    params.access_token = session.accessToken;
-
     dispatch(setKeyValue('loadingJoin', true));
-    eventJoin(eventId, bodyRequest, params)
+    eventJoin(session.accessToken, eventId, bodyRequest, params)
       .then(result => {
         dispatch(setKeyValue('loadingJoin', false));
 
